@@ -1,0 +1,612 @@
+/* General Styles */
+:root {
+    --primary-color: #0A2540; /* أزرق داكن (لون الشعار الرئيسي) */
+    --secondary-color: #FFFFFF; /* أبيض */
+    --accent-color: #C70039; /* أحمر (لون من الشعار للعناصر التفاعلية) */
+    --gold-color: #FFD700; /* ذهبي (للعناوين والنجاحات) */
+    --text-dark: #1F2937; /* نص داكن */
+    --text-light: #F3F4F6; /* نص فاتح */
+    --bg-light: #F9FAFB; /* خلفية فاتحة */
+    --bg-dark: #374151; /* خلفية داكنة */
+    
+    /* ************* تحديث الخط ************* */
+    /* يُفضل استخدام خط عربي من Google Fonts مثل 'Cairo' */
+    --font-family-arabic: 'Cairo', 'Arial', sans-serif; 
+}
+
+/* ********** يُفترض أنك أضفت استيراد خط القاهرة في ملف HTML ********** */
+/* مثال: <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet"> */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family-arabic);
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+    line-height: 1.6;
+    direction: rtl; /* لاتجاه الكتابة العربي */
+    text-align: right; /* لمحاذاة النص لليمين */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1, h2, h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    padding-bottom: 10px;
+}
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    transform: translateX(50%);
+    width: 60px;
+    height: 4px;
+    background-color: var(--accent-color);
+    border-radius: 2px;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-color);
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    padding: 12px 25px;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: #a3002a; /* لون أغمق قليلاً */
+}
+
+.btn-small {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+.btn-small:hover {
+    background-color: #06172a;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* يزيل المساحة البيضاء تحت الصور */
+}
+
+/* Header Specific Styles */
+.header {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+/* ************* تعديل على الشعار ************* */
+.logo img {
+    width: 60px; /* زيادة حجم الشعار قليلاً */
+    height: 60px;
+    border-radius: 50%;
+    margin-left: 15px;
+    object-fit: contain; /* لضمان ظهور الشعار بشكل كامل */
+}
+
+.logo h1 {
+    color: var(--secondary-color);
+    font-size: 1.8em;
+    margin-bottom: 0;
+}
+
+.navbar a {
+    color: var(--secondary-color);
+    margin-right: 25px;
+    font-size: 1.1em;
+    padding: 5px 0;
+    position: relative;
+    /* ************* إضافة انتقال سلس للخط السفلي ************* */
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* ************* تنسيق الرابط النشط (Active Link) ************* */
+.navbar a.active-link {
+    color: var(--gold-color); /* لون ذهبي للرابط النشط */
+    font-weight: bold;
+}
+
+/* خط التأثير السفلي */
+.navbar a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0; /* يبدأ بصفر */
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease; /* انتقال سلس للعرض */
+}
+
+/* خط التأثير عند التحويم والنشاط */
+.navbar a:hover::after,
+.navbar a.active-link::after {
+    width: 100%;
+}
+
+.navbar .support-btn {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    padding: 10px 20px;
+    border-radius: 25px;
+    margin-right: 0;
+    margin-left: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar .support-btn:hover {
+    background-color: #a3002a;
+}
+/* إزالة الخط السفلي لزر الدعم */
+.navbar .support-btn::after {
+    display: none;
+}
+.navbar .support-btn.active-link {
+    color: var(--secondary-color); /* إبقاء لونه أبيض حتى لو كان نشطًا */
+}
+
+
+.menu-toggle {
+    display: none; /* مخفي افتراضياً على الشاشات الكبيرة */
+    background: none;
+    border: none;
+    color: var(--secondary-color);
+    font-size: 2em;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/* ************* تأثير دوران لزر القائمة ************* */
+.menu-toggle.open {
+    transform: rotate(90deg);
+}
+
+/* Hero Section Styles */
+.hero {
+    position: relative;
+    height: 550px; /* زيادة الارتفاع قليلاً */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-color);
+    text-align: center;
+    overflow: hidden; 
+}
+
+.hero-bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    filter: brightness(50%); 
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+}
+
+.hero h2 {
+    color: var(--secondary-color);
+    font-size: 4em; /* زيادة حجم العنوان */
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.hero h3 {
+    color: var(--secondary-color);
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    max-width: 700px;
+    margin: 0 auto 30px auto;
+}
+
+/* Section Spacing */
+section {
+    padding: 80px 0;
+}
+
+/* About Section */
+.about {
+    background-color: var(--secondary-color);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.about-item {
+    background-color: var(--bg-light);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.about-item h3 {
+    color: var(--primary-color);
+    font-size: 1.7em;
+    margin-bottom: 15px;
+}
+
+.about-img {
+    display: block;
+    margin: 50px auto 0;
+    max-width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Teams Section */
+.teams {
+    background-color: var(--bg-dark);
+    color: var(--secondary-color);
+}
+
+.teams h2 {
+    color: var(--secondary-color);
+}
+.teams h2::after {
+    background-color: var(--gold-color);
+}
+
+.teams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.team-card {
+    background-color: var(--primary-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+}
+
+.team-card img {
+    width: 100%;
+    height: 220px; /* زيادة ارتفاع الصور في البطاقة */
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.team-card h3 {
+    color: var(--gold-color);
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.team-card p {
+    color: var(--text-light);
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+/* Academy Section */
+.academy {
+    background-color: var(--bg-light);
+}
+
+.academy-content {
+    display: flex;
+    flex-direction: row-reverse; 
+    align-items: center;
+    gap: 50px;
+    margin-top: 40px;
+}
+
+.academy-img {
+    flex: 1;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.academy-text {
+    flex: 1;
+}
+
+.academy-text h3 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.academy-text p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.academy-text .join-info {
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+/* News Section */
+.news {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.news h2 {
+    color: var(--secondary-color);
+}
+.news h2::after {
+    background-color: var(--gold-color);
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.news-card {
+    background-color: var(--bg-dark);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: right;
+    padding-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+}
+
+.news-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.news-card h3 {
+    color: var(--gold-color);
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    padding: 0 20px;
+}
+
+.news-card .news-date {
+    color: #bbb;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    padding: 0 20px;
+}
+
+.news-card p {
+    color: var(--text-light);
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+/* Contact Section */
+.contact {
+    background-color: var(--secondary-color);
+    text-align: center;
+}
+
+.contact h2 {
+    color: var(--primary-color);
+}
+
+.contact p {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+
+.contact-info p {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+.contact-info strong {
+    color: var(--primary-color);
+}
+
+.social-links {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.social-links img {
+    /* ************* تعديل على أيقونات التواصل الاجتماعي ************* */
+    width: 40px; 
+    height: 40px;
+    fill: var(--primary-color); /* قد تحتاج لتغيير لون SVG باليد إذا لم يعمل هذا */
+    transition: transform 0.3s ease;
+}
+
+.social-links img:hover {
+    transform: scale(1.1);
+}
+
+.map-container {
+    margin-top: 50px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.map-container iframe {
+    width: 100%;
+    height: 400px;
+}
+
+/* Footer Section */
+.footer {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    text-align: center;
+    padding: 25px 0;
+    font-size: 0.9em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header .container {
+        flex-wrap: wrap;
+    }
+
+    .navbar {
+        display: none; 
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--primary-color);
+        position: absolute;
+        top: 90px; /* تحت الهيدر المعدل */
+        right: 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding-bottom: 20px;
+    }
+
+    .navbar.active {
+        display: flex;
+    }
+
+    .navbar a {
+        margin: 10px 0;
+        padding: 10px 20px;
+        width: 100%;
+        text-align: center;
+        /* ************* إزالة التأثير السفلي في الموبايل ************* */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+    }
+    .navbar a::after {
+        display: none;
+    }
+    .navbar .support-btn {
+        margin: 10px auto; 
+    }
+
+    .menu-toggle {
+        display: block; 
+    }
+
+    .hero {
+        height: 400px;
+    }
+    .hero h2 {
+        font-size: 2.5em;
+    }
+    .hero h3 {
+        font-size: 1.3em;
+    }
+
+    .academy-content {
+        flex-direction: column; 
+        gap: 30px;
+    }
+    .academy-img {
+        max-width: 100%;
+        margin-bottom: 0;
+    }
+
+    h2 {
+        font-size: 2em;
+    }
+    .logo img {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo h1 {
+        font-size: 1.3em;
+    }
+    .hero h2 {
+        font-size: 2em;
+    }
+    .hero h3 {
+        font-size: 1em;
+    }
+    .about-item, .team-card, .news-card {
+        padding: 20px;
+    }
+}
